@@ -1,0 +1,49 @@
+--Tasks to be performed:
+--1. Create a user-defined functions to stuff the Chicken into ‘Quick Bites’. Eg: ‘Quick
+--Chicken Bites’.
+Create function dbo.quickchickenbites4(@restauranttype varchar(100))
+returns table
+AS
+RETURN (
+SELECT *,
+STUFF(RestaurantType,charindex(@restauranttype, RestaurantType), len(@restauranttype), 'chicken') AS quickchickenbites
+from Jomato
+where RestaurantType like '%'+@restauranttype+'%')
+
+select * from dbo.quickchickenbites4(Quick Bites);
+
+--2. Use the function to display the restaurant name and cuisine type which has the
+--maximum number of rating.
+Create function resturantRating(@input int)
+returns table
+AS
+RETURN (
+select RestaurantName,CuisinesType  from Jomato where rating>@input group by RestaurantName,CuisinesType order 
+by max(Rating) desc) 
+
+
+--3. Create a Rating Status column to display the rating as ‘Excellent’ if it has more the 4
+--start rating, ‘Good’ if it has above 3.5 and below 4 star rating, ‘Average’ if it is above 3
+--and below 3.5 and ‘Bad’ if it is below 3 star rating and
+
+select RestaurantName,
+	case 
+	when Rating > 4 then 'Excellent'
+	when Rating <= 4 and Rating > 3.5 then 'Good'
+	when Rating < 3.5 and Rating >= 3 then 'Average'
+	else 'Bad'
+	end as Rating_status
+	from Jomato;
+
+--4. Find the Ceil, floor and absolute values of the rating column and display the current
+--date and separately display the year, month_name and day.
+
+select CEILING(Rating) as ceil_rating,FLOOR(Rating) as Floor_rating,abs(Rating) as absolute_rating,
+ YEAR(GETDATE()) as Year, MONTH(GETDATE()) as month,DAY(GETDATE()) as date from Jomato;
+
+
+--5. Display the restaurant type and total average cost using rollup.
+select * from Jomato
+SELECT RestaurantType, sum(AverageCost) as Total_Avg_Cost
+FROM Jomato
+GROUP BY ROLLUP (RestaurantType);

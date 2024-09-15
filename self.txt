@@ -1,0 +1,3 @@
+select * from Employee where Gender='F' AND Dept='Analytics' and age<30
+
+select id,name,salary,age from Employee where Gender='M' order by salary asc

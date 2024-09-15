@@ -1,0 +1,2759 @@
+Online Site: https://sqliteonline.com/ 
+
+8*3hr = 24hr live sessions with trainer - End to End MS-SQL Development 
+Class-1, Class-2 - Theory 
+Class-3 to Class-8 - Practical
+1.5hr - Break 15min - 1.15min of class = 3 hr 
+QnA - Class - QnA
+
+Class-1: Theory 
+---------------
+what? Microsoft SQL Server(Database management software) - SQL (Structured query language)
+why?  SQL - It is the very core/ fundamental language in software industry 
+how?  weekend batch - 3hr - 24hr live class (1st half - 15min break - 2nd half)
+
+
+RDBMS(Structured) - MS-SQL Server(70%), Oracle, DB2, mysql, Postgres
+
+NoSQL(Bigdata/Unstructured) - MongoDB, Redis, Cassandra, CouchDB, DocumentDB, AuroraDB
+
+Application Layer: 
+User Interface - HTML, CSS
+Application layer - c#, java
+Database layer - SQL
+
+Client Server Architecture - Google, Facebook, Instagram, Amazon, YouTube 
+OLTP - Online Transaction Protocol 
+SQL Server - Server Software 
+SSMS - Clint software 
+SSMS <--> SQL Server
+
+-- What is client server architecture? 
+-- What is data consistency? 
+
+-- Command types:
+DQL, DDL, DML, DCL
+
+file-1:      'My name is Rahul, my age is 20'
+file-1-Copy: 'My name is Rahul, my age is 20'
+
+
+person(ID, Name, Age)
+1, Priya, 25
+2, Trimala, 26
+3, Mahesh, 26
+
+
+1 --> 25
+2 --> 26
+3 --> 26
+
+2 --> 26/27
+
+DBMS -- server name
+Databases
+Tables
+Data
+
+
+
+-- What is normalization? 
+Technique to minimize data duplication and increase logical consistency. 
+
+-- Why to perform normalization? 
+Remove redundancy from database tables
+Maintain consistency and integrity
+
+-- What is consistency? 
+there should not be any data mismatch between different access. 
+
+-- what is integrity? 
+If the data is consistent that means the table maintained its integrity.  
+
+anomalies without normalization?
+Redundancy, Insert, update, delete anomalies
+
+Person(SSN, Name, Age, Address)
+SSN --> Name
+
+
+Customer(CID, CName, CAge, CMobile) 
+Person(ANumber, Name, Age, Address)
+100 --> Rahul
+100 --> Riya 
+
+100 --> 
+
+
+-- what is dependency? 
+It is the logical relation between two columns in a table. 
+
+
+-- Funtional dependency:
+A cell value in a row can uniquely determine the other cell values of the same row
+
+employee_name --> Experience 
+Chintan       --> 
+Employee_ID --> Experience 
+ID --> Name, Age, Address, Gender
+
+-- Functional dependency 
+A --> B If for the value of A there is a unique value of B
+a1 --> b1
+a1 --> b2
+Here for the value of A as a1 we are not getting unique value of B 
+as there two values of B as b1 and b2
+
+
+Person(PID, PName, PAge)
+1, Raj, 10
+2, Riya, 20
+3, Nita, 10
+4, Rohit, 15
+
+PID --> Age
+1   --> 10
+3   --> 10
+
+1 --> 10
+1 --> 20
+
+4 --> 15
+4 --> 20
+
+
+-- Full Functional dependency 
+Student(roll_num, Name, course_id, Subject, Grade)
+xyz --> W
+
+roll_num, course_id --> grade 
+(1, CSE301) --> A
+(1, CSE306) --> C
+(2, CSE301) --> B
+(2, CSE306) --> A
+(3, CSE316) --> C
+
+
+
+
+Roll_num, Subject --> Grade
+(1, DBMS) --> A
+(1, DS)   --> C
+(2, DBMS) --> B
+(2, DS)   --> A
+(3, AI)   --> C
+
+
+
+
+
+-- Partial Functional dependency 
+Employee(emp_id, emp_name, emp_Age, emp_contact, Manager)
+100, Abhi, 25 --> 
+
+emp_id --> emp_name, emp_Age, emp_contact, Manager
+emp_id,emp_name --> emp_Age, emp_contact, Manager
+emp_id, emp_name, emp_Age --> emp_contact, Manager
+
+emp_id, emp_name --> Manager
+emp_id --> emp_name, Manager
+
+Table(A,B,C,D,E)
+A --> B,C,D,E
+A,B --> C,D,E
+A,B,C --> D,E
+
+
+-- Super Key: A super key is a single/combination of columns that uniquely identifies any row within a table.
+-- Candidate Key: A Candidate key is a subset of Super key without any unnecessary attributes for uniquely identifying rows.
+-- Prime attribute: An attribute that is a part of one of the candidate keys is known as prime attribute.
+-- Non Prime attribute: An attribute that is not part of the candidate keys is known as non prime attribute.
+
+Note: All the candidate keys are super key but all the super keys are not candidate keys. 
+
+Super key = Primary key
+candidate key 
+
+
+
+
+
+Class-2: Theory M1.2 P67
+---------------------------------
+-- Transitive Functional Dependency 
+PersonDetails(ID, Name, Age, PIN, Street, City)
+
+ID --> PIN
+PIN --> Street, City
+
+ID --> Street, City (transitive in nature)
+
+
+
+
+
+EmployeeDetails(EID, E_Name, Department, Base_Location)
+
+EID --> Department
+Department --> Base_Location
+EID --> Base_Location
+
+a --> b
+a --> b
+a --> b
+
+-- Multivalued Functional Depedency: (Special case)
+When there are more than one independent multivalued attribute in a table. 
+
+
+
+
+Example:
+PersonDetails(ID, Name, Age, country, nationality)
+1, raj, India, Indian
+2, Bob, US, American 
+3, Puja, India, Indian
+4, Liza, US, American 
+
+
+country --> nationality
+India --> Indian
+US --> American 
+
+
+Model --> --> Year
+
+
+
+col1, col2, col3, col4, ....
+
+Student(S_ID, S_Name, S_Age, S_Contact)
+CarDetails(Car_Name, Car_Model, Brand_Name)
+
+
+
+
+
+-- Decomposition
+
+-- Loss less join decomposition 
+Table(a, b, c, d, e, f, g, h)
+Table1(a, b, c, d)
+Table2(e, f, g, h)
+
+Table = Table1 U Table2
+
+
+Student(SID, SName, SAge, SAddress, SContact)
+Student1(SID, SName, SAge)
+Student2(SID, SAge, SContact, SAddress)
+
+Student = Student1 U Student2 
+
+-- not a lossless join decomposition 
+Table(a, b, c, d, e, f, g, h)
+Table1(a, b, c, d)
+Table2(a, f, g, h)
+
+
+-- Dependency preserving decomposition 
+
+Table(a, b, c, d, e, f)
+a --> b, c    -- a, b, c
+d --> e, f    -- d, e, f
+
+Table1(a, b, c, d) a --> b, c
+Table2(a, d, e, f) d --> e, f
+
+Table1 U Table2
+a --> b, c
+d --> e, f
+
+-- If the related columns of any functional dependency present is a table then only we can retain the dependency 
+
+PersonDetails(ID, Name, Age, PIN, Street, City)
+ID --> Name, Age
+PIN --> Street, City
+
+PersonDetails1 (ID, Name, Age, PIN)     ID --> Name, Age
+PersonDetails2 (PIN, Street, City) PIN --> Street, City
+
+PersonDetails = PersonDetails1 U PersonDetails2
+
+
+PersonDetails(ID, Name, Age, AreaCode, Street, City)
+              ID, Name, Age, AreaCode, Street, City
+ID --> Name, Age
+
+PersonDetails1 (ID, Name, Age)
+PersonDetails2 (AreaCode, Street, Age)
+PersonDetails3 (ID, City)
+
+Dependency Preserving Decomposition --> PersonDetails1
+Loss less join decomposition --> met
+
+
+
+
+lossless join decomposition --> All the columns should be preserved in the sub tables
+Dependency preserving decomposition --> All the funtional dependencies should be preserved 
+
+-- decompose student table into two sub tables using lossless join decomposition technique 
+Student(SID, S_Name, S_Age, S_Address, S_Contact, S_Gender)
+
+Student1(SID, S_Name, S_Age)
+Student2(SID, S_Address, S_Contact, S_Gender)
+
+
+-- decompose student table into two sub tables using dependency preserving technique 
+Student(SID, S_Name, S_Age,  S_Gender, S_AreaCode, S_Address, S_City)
+
+SID --> S_Name, S_Age,  S_Gender
+S_AreaCode --> S_Address, S_City
+
+Student1(SID, S_Name, S_Age,  S_Gender, S_City)
+Student2(SID, S_AreaCode, S_Address, S_City)
+
+
+Student1(SID, S_Name, S_Age)
+1, Anushka, 25
+3, Prince, 26
+2, Roland, 28
+
+
+
+
+
+
+---------------------------Normalization---------------------------------
+-- What is normalization? 
+Technique to minimize data duplication and increase logical consistency. 
+
+-- Why to perform normalization? 
+Remove redundancy from database
+Maintain consistency and integrity 
+
+
+
+Person(ID, Name, Age)
+1, Raj, 20
+
+
+
+-- First Normal Form:
+Rule-1: Single valued columns
+Rule-2: same kind of data in each column
+Rule-3: All column name should be unique
+Rule-4: FYI - Row/ Column order does not matter
+
+-- Second Normal Form:
+Rule-1: Table should follow first normal form
+Rule-2: No partial depedency in a table
+
+
+-- Third Normal Form:
+Rule-1: Table should follow second normal form
+Rule-2: No transative dependency in the table
+
+roll --> pin
+pin --> state, city, district 
+
+roll --> state, city, district (remove)
+
+
+RDBMS --> Relational Database Management System 
+online food delivery app:
+customer(cid, cname, ccontact)
+order(oid, oname, oprice,cid)
+
+
+-- BCNF: Boyce - Codd Normal Form (Extension of third Normal Form)
+Rule-1: Table should follow third normal form
+Rule-2: A single Key column should be determining all other columns of the table
+
+
+-- Forth Normal Form:
+Rule-1: Table should follow BCNF
+Rule-2: Table should not have multi valued dependency. 
+
+
+eid, cert, hobby
+
+1, java, music
+1, java, Dance
+1, java, Writing, 
+1, java, Books
+
+eid --> cert (multivalued dependency)
+
+Table1(eid, cert)
+1, java
+
+Table2(eid, hobby)
+1, music
+1, Dance
+1, Writing
+1, books
+
+
+
+
+
+
+
+
+-- this is a comment line 
+/*
+This 
+is
+multiple
+comment 
+line
+syntax
+*/
+
+-- SQL programming language is case insencitive 
+create database TestDatabase -- command to create a new database
+Use AdventureWorks                    -- command to change the database connection 
+DROP DATABASE TestDatabase   -- command to drop a database
+
+
+
+
+system databases -- below 4 databases are dedicated for SQL use
+-- no user can store information in the system databases. 
+master -- it holds all instance specific information
+model  -- it is the template of a new blank database
+msdb   -- it holds all SQL job related information
+tempdb -- holds temporary data of user databases
+
+-- Instance
+-- database
+-- tables
+-- data
+
+
+
+
+Class-3: Practical M2P1
+--------------------------
+Value: Pranay - 6
+
+char(32)    - simply allocate maximum length in the disk/storage - 32
+varchar(32) - after validating the data length it will allocate space - 6
+
+
+create table StudentDetails
+(
+ID int not null, 
+Name varchar(24) not null, 
+Age tinyint, 
+Gender varchar(8), 
+Country varchar(24) not null
+)
+
+drop table StudentDetails
+
+what is NULL? 
+-- NULL is a special character representing "No value" 
+null -- is the column type
+-- what is null and what is null constraint of a table
+what is Primary key?
+-- It is the candidate key which is implemented as primary key. 
+-- A column will be not null and unique if it is a primary key. 
+
+
+-- please store the information of employee
+create table dbo.EmployeeDetails
+(
+E_ID int not null, 
+Name varchar(64) not null, 
+Age tinyint null, 
+Gender varchar(1) not null, 
+City varchar(24) not null, 
+Salary int not null, 
+Contact varchar(12)
+)
+
+
+
+-- Zomato
+Customer(C_ID, C_Name, C_Address, C_Phone)
+1, abc, xyz, 123
+2, def, ynx, 456
+3, ghi, pko, 789
+
+Orders(O_ID, O_Item, O_Status, O_Amount, C_ID)
+1, rice, preparing, 50, 4
+
+
+
+Create Table Person
+(
+PID INT NOT NULL, 
+Name varchar(32) NOT NULL, 
+Address varchar(64) NOT NULL, 
+DOB Date NULL, 
+Primary Key(PID)
+)
+
+insert into person (pid, name, address, dob)
+values(1,'Mahesh', 'Pune', '2000-01-15')
+insert into person 
+values(2,'Asma', 'Mumbai', '2002-02-10')
+insert into person 
+values
+(3,'Nadaf', 'Kolkata', '2005-02-10'),
+(4,'Amit', 'Goa', NULL),
+(5,'Ekwulu', 'Ranchi', '2002-02-10'),
+(6,'Asma', 'Pune', NULL)
+insert into person (pid, name, address)
+values(7,'Asma', 'Pune')
+
+
+-- NULL: NULL is a special character that denotes not having any value 
+-- Unique Constraint: Distinct values + NULL is allowed 
+-- Primary Key Constraint: Not Null + Unique (Candidate Key)
+
+
+
+select -- stating that we want to see the data
+pid, name -- I want to see all the columns of the table
+from   -- is stating from where I want to see the data
+person -- is the table name or data source 
+
+select * from person 
+
+select pid, name, address from person 
+
+
+
+
+-- Live Assignment: 
+-- table structure - EmployeeDetails(E_ID, E_Name, E_Address, E_Age)
+
+-- please write the SQL query to create the table 
+-- Write a single SQL query to insert 5 records at a single run
+
+create table EmployeeDetails
+(
+E_Id int,
+E_Name varchar(32),
+E_Address varchar(64),
+E_age int
+)
+
+INSERT INTO EmployeeDetails(E_ID,E_Name, E_Address, E_Age) 
+VALUES
+  (1, 'Dave', 'Pune', 20),
+  (2, 'Disha', 'Mumbai', 31),
+  (3, 'Tom', 'Delhi', 45),
+  (4, 'Liza', 'Thane', 23),
+  (5, 'Harry', 'Aurangabad', 36)
+
+ select * from EmployeeDetails
+
+
+
+
+-- I want to see person details where address is Goa
+select * from person where address = 'Goa' 
+
+
+-- I want to see person details where id is less than 5
+select * from person where pid < 5
+
+
+-- Distinct Operator:
+-- show me only the available bloodgroups in the person table
+select distinct bloodgroup from person 
+select distinct bloodgroup from person where BloodGroup IS NOT NULL 
+
+-- show me the different address available in person table 
+select distinct Address from person 
+
+
+
+
+
+
+-- AND operator
+-- show me the O+ blood group person details present in kolkata location
+select * from person where Address = 'Kolkata'
+select * from person where BloodGroup = 'O+'
+select * from person where Address = 'Kolkata' AND BloodGroup = 'O+' AND PID < 10
+
+
+-- OR operator
+-- show me the person details if the person is from goa OR the person is O+
+select * from person where Address = 'goa'
+select * from person where BloodGroup = 'O+'
+select * from person where Address = 'Goa' OR BloodGroup = 'O+' 
+
+AND:
+True AND True --> Eligible for output 
+
+OR:
+False OR False --> Not Eligible For Output 
+True OR False --> Eligible for output 
+False OR True --> Eligible for output 
+True OR True  --> Eligible for output 
+
+select * from person where PID < 5 OR BloodGroup = 'O+' 
+-- I want to see person details where address is kolkata and blood group is O+
+select * from person where address = 'Kolkata' AND bloodgroup = 'O+'
+
+-- Between Operator: 
+select * from dbo.Person where PID  between 2 and 5 
+select * from dbo.Person where PID >= 2 AND PID <= 5
+
+-- Working with NULL value 
+select * from person where DOB IS NULL
+select * from person where DOB IS NOT NULL
+
+
+
+-- Not operator
+select * from person where address = 'Kolkata'
+select * from person where NOT address = 'Kolkata'
+select * from person where address <> 'Kolkata'
+select * from person where address != 'Kolkata'
+
+
+select * from dbo.Person where Address = 'Kolkata'
+select * from dbo.Person where BloodGroup = 'A+'
+select * from dbo.Person where PID = 10
+select * from dbo.Person where Address = 'Kolkata' AND BloodGroup = 'O+'
+select * from dbo.Person where Address = 'Kolkata' OR BloodGroup = 'A+'
+select * from dbo.Person where BloodGroup <> 'A+'
+select * from dbo.Person where BloodGroup != 'A+'
+
+
+-- not having any value can be represented using a special character: NULL 
+select * from Person where DOB IS NULL 
+select * from Person where DOB IS NOT NULL 
+select * from Person where BloodGroup IS NULL 
+select * from Person where BloodGroup IS NOT NULL 
+select * from Person where DOB IS NULL AND BloodGroup IS NULL
+
+
+
+-- Live Assignment: 
+
+-- table structure 
+EmployeeDetails(E_ID, E_Name, E_Address, E_Age)
+
+-- please write the SQL query to create the table where E_ID will be the PK
+-- Write a sigle SQL query to insert 5 records at a single run
+-- show employee details for only aged below 40
+
+-- please write the SQL query to create the table where E_ID will be the PK
+CREATE TABLE EmployeeDetails
+(
+E_ID int not null PRIMARY KEY,
+E_Name varchar(64) not null,
+E_Address varchar(256) not null,
+E_Age tinyint null
+)
+
+-- Write a sigle SQL query to insert 5 records at a single run
+INSERT INTO EmployeeDetails VALUES
+(1,'SANTHOSH','KOLKATA',43),
+(2,'THAMAN','CHENNAI',26),
+(3,'HARSH','BANGALORE',40),
+(4,'SAMHITH','DELHI',26),
+(5,'SAMARTH','KANPUR',24)
+
+-- show employee details for only aged below 40
+select * from EmployeeDetails where E_Age < 40 
+
+
+
+-- Like operator: 
+-- % - this wild card charecter, can bypass 0,1 or multiple charecters 
+-- _ - this wild card charecter, can bypass only one charecter at a time
+
+select * from Employee where name like 'John%'
+select * from dbo.Person where name LIKE 'a%'
+select * from dbo.Person where BloodGroup like 'a%'
+select * from dbo.Person where Name like '%a'
+select * from dbo.Person where Name like '%a%'
+select * from dbo.Person where DOB like '1995-%'
+
+
+select * from dbo.Person where name LIKE '_a%'
+select * from dbo.Person where name LIKE '__a%'
+select * from dbo.Person where name LIKE '%a_'
+
+-- what if we have to search '%' charecter in like command
+select * from dbo.Person where name like '%[%]%'
+
+-- to use ' as a string charecter, we need to use '' 
+select * from dbo.Person where Name like '%''%'
+
+
+
+-- Between Operator:
+-- show me the employee details getting salary between 5000 to 8000
+select * from employee where salary between 5000 and 8000 
+
+-- In / Not In Operator:
+select * from dbo.Person where BloodGroup IN ('AB+', 'O+', 'B+') 
+select * from dbo.Person where BloodGroup NOT IN ('AB+', 'O+', 'B+') 
+
+-- show me the employee details where age is between 25 to 30
+select * from employee where age between 25 and 30 -- 25 <= age AND  age <= 30
+
+-- fulfil the requirement without using between operator
+select * from employee where 25 <= age AND  age <= 30
+
+
+
+
+
+
+Class-4: Practical M3 P1
+-----------------------------
+
+-- Import data from excel 
+
+-- Update a single value
+-- update the age of employeeid 1
+update employeedetails
+set E_age = 40
+where e_id = 1
+
+-- update multiple values 
+-- if the age is 26 then please update it as 30
+update employeedetails
+set e_age  = 45
+where e_age = 40 
+
+
+update employeedetails
+set e_name = 'Thaman', E_address = 'Chennai'
+where e_id = 2
+
+update employeedetails
+set e_age = 35
+where e_age in (30,24)
+
+
+update student
+set age = 20
+where id = 5
+
+-- Update DOB for ID 5, with the value of '2008-09-10'
+update student 
+set DOB = '2008-06-09' 
+where Id=5
+GO
+-- Update multiple column of a row
+update student 
+set age = 23, DOB = '2000-06-09', Address = 'Kolkata'
+where Id=5
+
+-- update student address as 'Mumbai' where address is 'Pune'
+update student 
+set address='Mumbai' 
+where address='Pune'
+
+-- update -- when we need to change some data in a table 
+update person
+set DOB = '2008-09-10'
+where PID = 4 
+GO
+
+-- NULL is a special charected and we need special operator 
+select * from student where age IS null
+select * from student where age IS NOT null
+GO
+-- remove age details where gender is female 
+update student 
+set age = NULL 
+where gender='F'
+GO
+-- update age with 0 where the value of age is NULL
+update student 
+set age=0 
+where age is null;
+GO
+
+update Person
+set DOB = '2000-01-01'
+where DOB IS NULL 
+GO
+update Person
+set Name = 'Mohan'
+where name = 'Mahesh'
+GO
+update Person
+set Name = 'Ankan', Address = 'Pune'
+where name = 'Amit'
+GO
+update person
+set DOB = NULL
+where DOB = '2000-01-01'
+GO
+update person
+set DOB = NULL 
+WHERE Name = 'Ankan' AND Address = 'Pune' 
+GO
+update person
+set DOB = NULL 
+WHERE Name = 'Mohan' OR Address = 'Pune' 
+GO
+update person
+set PID = 11 
+WHERE PID = 10
+GO
+update person 
+set address = 'Pune' 
+where address = 'Pune11' 
+GO
+update person 
+set dob = NULL, name = NULL
+where name = 'dk' and dob='1989-10-13' 
+GO
+
+
+
+-- delete -- when we need to remove some data from the table
+
+-- remove the record where student id is 5
+delete from student where id = 5
+
+-- remove the records where address is chennai 
+delete from student where address = 'Chennai'
+
+-- remove the records of student where age is not 0
+Delete from student where age <> 0
+
+
+
+delete from person 
+where PID = 11
+GO
+delete from person
+where address = 'Ranchi' 
+GO
+delete from person where pid=2 OR pid=7
+GO
+delete from person where pid in (4,6,8)
+GO
+delete from person where DOB is null
+GO
+delete from person
+GO
+
+
+
+
+-- difference between delete and truncate
+delete					truncate 
+DML						DDL
+support where			no where
+reversable/ rollback	no rollback
+logs transaction entry  does not logs transaction
+slower in nature        faster than delete 
+
+
+data -- it holds the data 
+log  -- it holds the history of transactions
+
+
+account balance - 100 -- data file
+transaction +25 at 10:30 pm by user 'xyz' on database 'TestDB' table 'Account' -- log file
+account balance - 125 -- data file 
+
+
+
+
+-- How we can insert data into a from from a different table
+-- PID 2 & 5 got a job and would be a part of employee table
+insert into employee -- values syntax is not used here 
+select PID, Name from person where PID in (2,5)
+GO
+-- PID 3 got a job and would be a part of employee table
+insert into employee
+select PID, Name from person where PID = 3
+GO
+
+-- Access table from a different database
+select * from demo.dbo.Employee
+select * from dbo.Employee
+-- schema is a logical seperator of tables
+-- you may have different depertment in a company
+-- for different department you can use different schema for better managibility 
+
+-- instance/ server
+-- database
+-- schema (default schema is dbo)
+-- tables
+CREATE Schema HR
+create table hr.test
+(
+ID int, 
+name varchar(12)
+)
+
+
+
+
+
+-- Join operations
+-- what? to map two or more decomposed table into one output
+-- why? to get required information from multiple tables
+-- how? using join operators (Inner, Left, Right and Full join) 
+
+
+-- please show employee name, age, department and location
+select e.id, e.Name, e.age, e.Dept, d.Location from 
+employee as e
+INNER JOIN 
+Department as d
+ON e.dept = d.name
+where e.age > 30
+
+
+select 
+t1.Name as EmployeeName, 
+t1.Salary as EmployeeSalary, 
+t1.Age as EmplyeeAge, 
+t2.Location as EmployeeLocation
+from 
+employee as t1
+INNER JOIN 
+Department as t2
+ON t1.dept = t2.name
+where t2.Location = 'New York'
+
+
+select * from 
+dbo.employee as t1
+LEFT JOIN 
+dbo.Department as t2
+ON t1.dept = t2.name
+GO
+
+select * from 
+dbo.employee as t1
+RIGHT JOIN 
+dbo.Department as t2
+ON t1.dept = t2.name
+GO
+
+select * from 
+dbo.employee as t1
+FULL JOIN 
+dbo.Department as t2
+ON t1.dept = t2.name
+GO
+
+
+-- show me employee ID, Name, Salary, Age of Mumbai
+select employee.ID, employee.Name, employee.Salary, employee.Age
+from  employee INNER JOIN  Department
+on employee.dept = Department.Name
+where Department.Location = 'Mumbai' 
+
+-- show me the employee details where there is no respective department details
+select Employee.* from 
+employee left join Department 
+on employee.Dept = Department.Name
+where Department.ID IS NULL 
+
+-- show me the department details where there is no employees 
+select Department.* from 
+employee right join Department
+on employee.Dept = Department.Name
+where Employee.ID IS NULL 
+
+-- Class Example 
+-- please show customer name, mobile, item, amount
+Select c.name,c.mobile,o.item,o.amount from 
+Customerdetails as c
+Inner join
+Orderdetails as o
+On c.cid = o.cid
+
+select e.ID, e.Name as E_Name, e.Salary, d.Location, d.Name as D_Name
+from employee as e
+INNER JOIN 
+Department as d
+ON e.dept = d.name
+where e.salary > 7000
+
+select * 
+from employee as e  INNER JOIN Department as d
+ON e.dept = d.name
+
+select * 
+from employee as e  LEFT JOIN Department as d
+ON e.dept = d.name
+
+select * 
+from employee as e  RIGHT JOIN Department as d
+ON e.dept = d.name
+
+select * 
+from employee as e  FULL JOIN Department as d
+ON e.dept = d.name
+
+
+select e.ID as e_id, e.Name as e_name, e.Age as e_age, d.Location as d_location
+from employee as e
+INNER JOIN 
+Department as d
+ON e.dept = d.name
+where e.Gender = 'F' AND d.Location = 'Kolkata'
+GO
+
+select employee.ID as e_id, Employee.name as e_name, Employee.Age as e_age, Department.Location as d_location
+from employee 
+INNER JOIN 
+Department 
+ON Employee.dept = Department.name
+where Employee.Gender = 'F' AND Department.Location = 'Kolkata'
+GO
+
+
+
+
+
+-- Class Example 
+-- please show customer name, mobile, item, amount
+Select c.name,c.mobile,o.item,o.amount from 
+Customerdetails as c
+Inner join
+Orderdetails as o
+On c.cid = o.cid
+
+
+
+-- show businessentityid, phonenumber, phonenumbertype 
+-- for a report from 2009 onwards..... 
+select * from person.PersonPhone
+select * from person.ContactType
+
+-- Query
+SELECT A.BusinessEntityID, A.PhoneNumber, B.Name as PhoneNumberType
+from person.PersonPhone as A INNER JOIN person.ContactType as B
+ON A.PhoneNumberTypeID = B.ContactTypeID
+where A.ModifiedDate >= '2009-01-01'
+GO
+
+
+
+
+
+
+-- update using join operator 
+-- increase salary by 100 for the employees who's department is located in Mumbai 
+select * from employee
+select * from department 
+
+select * from 
+employee e inner join department d on e.Dept = d.Name
+where d.Location = 'Mumbai' 
+
+update employee
+set employee.salary = employee.salary + 100, employee.age = Employee.age + 1
+from 
+employee inner join department on employee.Dept = department.Name
+where department.Location = 'Mumbai' 
+
+
+-- delete using join operator 
+-- fire all the employees where the department location is newyork  
+select * from employee
+select * from department 
+
+select * from 
+employee e inner join department d on e.Dept = d.Name
+where d.Location = 'New York' 
+
+
+delete employee
+from 
+employee inner join department on employee.Dept = department.Name
+where department.Location = 'New York'  
+
+
+
+
+-- give a hike of 100 in salary where employee department location is New York 
+select *
+from dbo.employee as t1
+INNER JOIN 
+dbo.Department as t2
+ON t1.dept = t2.name
+where t2.Location = 'New York'
+GO
+
+update t1
+set t1.salary = t1.salary + 100
+from dbo.employee as t1
+INNER JOIN 
+dbo.Department as t2
+ON t1.dept = t2.name
+where t2.Location = 'New York'
+GO
+
+
+-- Delete all the employee records where department location is Kolkata
+select *
+from dbo.employee as t1
+INNER JOIN 
+dbo.Department as t2
+ON t1.dept = t2.name
+where t2.Location = 'Kolkata'
+GO
+
+delete t1
+from dbo.employee as t1
+INNER JOIN 
+dbo.Department as t2
+ON t1.dept = t2.name
+where t2.Location = 'Kolkata'
+GO
+
+
+
+-- please show customer name, mobile, item, amount
+select * from 
+CustomerDetails as cd inner join OrderDetails as od
+on cd.cid = od.cid
+
+-- update the order item as upma for customer name yogita 
+update od set od.item = 'Idli', od.amount = 55 from
+CustomerDetails as cd inner join OrderDetails as od
+on cd.cid = od.cid
+where cd.name = 'Yogita'
+
+-- delete the order placed by yogita 
+delete od from 
+CustomerDetails as cd inner join OrderDetails as od
+on cd.cid = od.cid
+where cd.name = 'Yogita'
+
+-- delete the order placed by Rahul
+delete od from 
+CustomerDetails as cd inner join OrderDetails as od
+on cd.cid = od.cid
+where cd.name = 'Rahul' 
+
+
+-- Task: Join 
+-- show us a report about businessentityid and their address type
+-- arrange the report based on latest business date
+select * from person.addresstype
+select * from person.BusinessEntityAddress
+
+select b.BusinessEntityID, a.Name as AddressType from 
+person.addresstype a inner join person.BusinessEntityAddress b
+on a.AddressTypeID = b.AddressTypeID
+order by b.ModifiedDate desc 
+
+
+
+V1 - s
+V2 - t
+
+
+-- Merge Operation: Making the target table same as source table.(Two table structure should be same)
+
+-- source table --> Is only for reference of data, no change will be performed on source table. 
+-- target table --> I/ U/ D operations will be performed on target table, based on source table.  
+-- The two tables will be compared by the PK as both table structure is same (merge prerequisites)
+
+-- Difference between Merge & Join: 
+
+-- Merge compares two table with same structure, based on the PK of the table & take action on target table. 
+-- Join map records from two tables based on the column which is maintaining the relation between two tables. 
+
+
+
+-- Create environment
+CREATE TABLE SourceProducts(
+    ProductID INT,
+    ProductName VARCHAR(50),
+    Price DECIMAL(9,2)
+) 
+INSERT INTO SourceProducts(ProductID,ProductName, Price) VALUES(1,'Table',100)
+INSERT INTO SourceProducts(ProductID,ProductName, Price) VALUES(2,'Desk',80)
+INSERT INTO SourceProducts(ProductID,ProductName, Price) VALUES(3,'Chair',50)
+INSERT INTO SourceProducts(ProductID,ProductName, Price) VALUES(4,'Computer',300)
+GO  
+CREATE TABLE TargetProducts(
+    ProductID INT,
+    ProductName VARCHAR(50),
+    Price DECIMAL(9,2))
+INSERT INTO TargetProducts(ProductID,ProductName, Price) VALUES(1,'Table',100)
+INSERT INTO TargetProducts(ProductID,ProductName, Price) VALUES(2,'Desk',180)
+INSERT INTO TargetProducts(ProductID,ProductName, Price) VALUES(5,'Bed',50)
+INSERT INTO TargetProducts(ProductID,ProductName, Price) VALUES(6,'Cupboard',300)
+SELECT * FROM SourceProducts
+SELECT * FROM TargetProducts
+GO
+
+-- Examples: 
+MERGE TargetProducts AS Target
+USING SourceProducts AS Source
+ON Source.ProductID = Target.ProductID
+-- For Inserts
+WHEN NOT MATCHED BY Target THEN
+        INSERT (ProductID,ProductName, Price) 
+        VALUES (Source.ProductID,Source.ProductName, Source.Price)
+-- For Updates
+WHEN MATCHED THEN 
+		UPDATE SET
+        Target.ProductName	= Source.ProductName,
+        Target.Price  = Source.Price
+-- For Deletes
+WHEN NOT MATCHED BY Source THEN
+    DELETE;
+GO
+
+
+
+
+
+
+-- Alter table command
+-- Script-1
+create table alter_Test
+(
+ID int, 
+Name varchar(10)
+)
+select * from alter_test 
+
+-- Add a column 
+alter table alter_test
+add age tinyint null 
+
+-- Add multiple column 
+alter table alter_test
+add column1 int null, column2 int null
+
+
+-- remove a column 
+alter table alter_test
+drop column age
+
+-- remove multiple columns 
+alter table alter_test
+drop column column1, column2
+
+
+-- modify a column 
+alter table alter_test
+alter column Name varchar(64) not null 
+
+-- modify multiple columns 
+alter table alter_test
+alter column ID int not null
+
+alter table alter_test
+alter column Name varchar(32) not null 
+
+
+-- Rename a table
+EXEC sp_rename 'alter_Test', 'TestCase';
+GO
+
+-- Rename a column
+EXEC sp_rename 'TestCase.Name', 'FullName', 'column';
+GO
+
+
+-- Script-2
+ALTER TABLE dbo.Employee 
+ADD Experience INT NULL
+GO
+ALTER TABLE dbo.Employee 
+DROP COLUMN Experience 
+GO
+ALTER TABLE dbo.Employee 
+ALTER COLUMN Name varchar(64) NOT NULL 
+GO
+
+
+
+
+-- Rename a table
+EXEC sp_rename 'customer', 'customerdetails';
+GO
+-- Rename a column
+EXEC sp_rename 'customerdetails.email', 'C_email', 'column';
+GO
+
+
+-- Add primary key
+ALTER TABLE TestCase 
+ADD CONSTRAINT PK_TestCase_ID PRIMARY KEY  CLUSTERED 
+( ID ASC )
+
+-- drop primary key
+ALTER TABLE TestCase
+DROP CONSTRAINT PK_TestCase_ID
+
+
+
+
+
+-- Temp table OR Hash table
+-- use of temptable (store table data temporarily)
+-- scope of temptable (only within the session)
+-- we can not see the temptable from any other session
+-- operation is same as normal table
+-- When the temptable will be dropped (As soon as we close the session)
+-- temp table name starts with a '#' and rest syntax is same
+-- the existence of temp table is only within the session where created 
+-- the temp table will be dropped as soon as the originating session is closed 
+
+
+CREATE TABLE #TestTable
+(
+    ProductID INT,
+    ProductName VARCHAR(50),
+    Price DECIMAL(9,2)
+)
+GO
+insert into #TestTable values 
+(1, 'abc', 10.2)
+GO
+select * from #TestTable
+GO
+
+-- use case of temp table
+create table #temp
+(
+pid int, 
+name varchar(32),
+address varchar(32),
+bloodgroup varchar(4)
+)
+
+select * from #temp
+
+insert into #temp
+select pid, name, address, BloodGroup from person 
+where address in ('Mumbai', 'Punjab')
+
+select * from #temp
+
+
+
+-- create the table based on the op structure 
+-- insert the op records into the new table
+select employee.ID, employee.Name, employee.Salary, employee.Age
+into #temp1
+from  employee INNER JOIN  Department
+on employee.dept = Department.Name
+where Department.Location = 'Kolkata' 
+
+-- when the table structure is present
+insert into #temp1
+select employee.ID, employee.Name, employee.Salary, employee.Age
+from  employee INNER JOIN  Department
+on employee.dept = Department.Name
+where Department.Location = 'Kolkata'
+
+
+-- Global Temp table name starts with '##'
+-- Existance of global temp table is across sessins
+-- Once source session is termineted, the global temp table is also dropped
+
+CREATE TABLE ##TestTable
+(
+    ProductID INT,
+    ProductName VARCHAR(50),
+    Price DECIMAL(9,2)
+)
+GO
+insert into ##TestTable values 
+(1, 'abc', 10.2)
+GO
+select * from ##TestTable
+GO
+
+-- difference between local and global temp table 
+-- Scope of local temp table is only within the session/connection 
+-- Scope of global temp table is across the sessions/connections 
+
+
+
+
+
+
+Class-5: Practicals M4P9
+---------------------------
+
+-- Aggregate Functions
+select AVG(Age) as Average_Age from Employee
+select AVG(Salary) as Average_Salary from Employee
+GO
+
+select Count(ID) as Count from Employee
+select Count(Name) as Count from Employee
+GO
+
+select MAX(Salary) as Max_Salary from Employee
+select MAX(Age) as Max_Age from Employee
+GO
+
+select MIN(Salary) as Min_Salary from Employee
+select MIN(Age) as Min_Age from Employee
+GO 
+
+select SUM(Salary) as SUM_Salary from Employee
+select SUM(Age) as SUM_Age from Employee
+GO
+
+
+
+-- Date Functions
+-- date time format in SQL
+2023-06-10 22:18:41.383
+yyyy-mm-dd hh:mm:ss.ms
+
+
+select GETDATE()
+
+select DAY('2022-06-26 21:52:34.383')
+select MONTH('2022-06-26 21:52:34.383')
+select YEAR('2022-06-26 21:52:34.383')
+
+select DAY(GETDATE())
+select MONTH(GETDATE())
+select YEAR(GETDATE())
+select DAY(getdate()) as Day, MONTH(getdate()) as month, YEAR(getdate()) as year
+
+
+select EOMONTH('2023-12-02')
+
+select DATEADD(MONTH, 2, '2023-04-02')
+select DATEADD(DAY, -5, '2023-04-02')
+select DATEADD(YEAR, 10, '2023-04-02')
+
+select DATEDIFF(DAY, '2023-04-02', '2023-04-12')
+select DATEDIFF(MONTH, '2023-04-02', '2023-06-12')
+select DATEDIFF(YEAR, '2023-04-02', '2026-06-12')
+select DATEDIFF(HOUR, '2023-04-02 10:30', '2023-04-02 18:30')
+select DATEDIFF(MINUTE, '2023-04-02 10:30', '2023-04-02 18:30')
+
+select format(GETDATE(),'dd-MM-yyyy')
+select format(GETDATE(),'dd-MM-yy')
+select format(GETDATE(),'dd.MM.yyyy')
+select format(GETDATE(),'dd-MMM-yyyy')
+
+
+
+-- String Function
+select 'A' + '                        BCD'
+select 'A' + LTRIM('                        BCD')
+GO
+select 'ABC                        ' + 'D'
+select RTRIM('ABC                        ') + 'D'
+GO
+select 'ABC' + '                   -                        ' + 'DEF'
+select 'ABC' + TRIM('                   -                        ') + 'DEF'
+GO
+select LOWER('ABC')
+select UPPER('abc')
+select REVERSE('ABCD')
+GO
+select len('abcde')
+GO
+select SUBSTRING('ABCD', 2, 3)
+'abc' --> 'Abc'
+SELECT UPPER(SUBSTRING('abc', 1, 1)) + 'bc'
+
+-- Example
+dEbABrAtA --> Debabrata
+select UPPER(SUBSTRING('dEbABrAtA', 1, 1)) + LOWER(SUBSTRING('dEbABrAtA', 2, 100))
+
+select name, len(name) from employee 
+GO
+
+
+-- input
+'soham              ghosh'
+
+-- output
+'Soham Ghosh'
+select 
+upper(substring(substring('soham              ghosh',1,5),1,1)) + 
+substring(substring('soham              ghosh',1,5),2,4) + 
+' ' + 
+upper(substring(ltrim(substring('soham              ghosh',6,30)),1,1)) + 
+substring(ltrim(substring('soham              ghosh',6,30)),2,4)
+
+
+
+
+
+
+
+
+
+-- CAST: it is used to change the type of a data
+select CAST('123.12' AS decimal)
+select CAST('123.12' AS numeric(12,2))
+select CAST('123.12' AS float)
+select cast('123.12' as numeric(5,2)) + 1.88
+select CAST(123 AS numeric(8,3))
+select CAST(123.12 AS int)
+
+select CAST('abc' AS int)
+select try_CAST('abc' AS int)
+select TRY_CAST(123.12 AS INT)
+
+-- PARSE
+select TRY_PARSE('123.12' AS float)
+select TRY_PARSE('14-12-2020' AS datetime)
+select TRY_PARSE('2020-12-20' AS date)
+select TRY_PARSE('2020-12-20 12:12:12.000' AS datetime)
+
+
+-- CONVERT
+select CONVERT(INT, '123')
+select CONVERT(INT, 'abc')
+select TRY_CONVERT(INT, 888.99)
+
+
+
+-- ISNULL
+select ISNULL(NULL,5)
+select ISNULL(10,5)
+select ISNUMERIC(10.5)
+select ISNUMERIC(10.0)
+select ISNUMERIC('abc')
+select CHOOSE(4,100,200,300,400)
+
+select c_name,ISNULL(c_age,21) from CustomerDetails
+select c_name,c_age from CustomerDetails
+
+-- Example
+select name,cast(salary as numeric(10,2)) from employee
+select name,convert(numeric(10,2), salary) from employee
+
+
+-- please show the name and blood group of the employee id 1
+name: Ashok
+BG: A+
+Output - 'Name: Ashok and BloodGroup: A+'
+-- using select statement 
+select 'Name: ' + name + ' and BloodGroup: ' + bloodgroup from person where pid = 1
+
+
+
+
+-- using variable 
+declare @name varchar(16) , @BG varchar(4) 
+select @name = name from person where pid = 1
+select @bg = BloodGroup from person where pid = 1
+select 'Name: ' + @name + ' and BloodGroup: ' + @BG
+
+-- New line charecter 
+Print 'New' + CHAR(10) + 'Line'
+
+
+
+-- the scope of any variable in only within execution 
+declare @firstvariable int, @secondvariable varchar(5)
+set @firstvariable = 10
+set @secondvariable = 'Test'
+select cast(@firstvariable as varchar(4)) + @secondvariable as Result
+
+
+
+
+-- Live assignment: 
+-- Take two variables, add the two variable into the third variable
+-- show the third variable using output structure like below
+-- The Output Value is: <The value of third variable>
+-- 20 + 20 = 40
+-- The Output Value is: 40
+
+DECLARE @var1 INT = 20, @var2 INT = 20, @result INT
+SET @result = @var1 + @var2
+print 'The Output Value is: ' + CAST(@result AS VARCHAR(10)) 
+
+
+
+
+
+
+-- Case
+
+declare @input int = 4
+
+select
+case
+    when @input = 1 then 'Tea'
+	when @input = 2 then 'Coffee'
+	when @input = 3 then 'Milk'
+	when @input = 4 then 'Hot water'
+	else 'Please provide a valid input'
+end
+
+
+declare @age tinyint = 85
+
+select 
+	CASE
+	    when @age<20 then 'Young'
+	    when @age<60 then 'Middleage'
+	    when @age<80 then 'Old'
+	    ELSE 'Very Old'
+	END
+GO
+
+select *,
+	CASE
+	    when Age < 30 then 'Young'
+	    when Age < 60 then 'Middleage'
+	    when Age < 80 then 'Old'
+	    ELSE 'Very Old'
+	END as AgeCategory 
+from CustomerDetails
+
+
+select C_Age,
+	CASE
+	    when C_Age between 1 and 30 then 'Young'
+	    when C_Age between 31 and 60 then 'Middleage'
+	    when C_Age between 61 and 100 then 'Old'
+	    ELSE 'NA'
+	END as AgeCategory 
+from CustomerDetails
+
+
+
+-- Online Delivery app
+declare @status int = 0
+
+select 
+	CASE
+	    when @status = 1 then 'Order Placed'
+	    when @status = 2 then 'Preparing'
+	    when @status = 3 then 'Out for delivary'
+	    when @status = 4 then 'Delivered'
+	    ELSE 'Yet to get order'
+	END as OrderStatus
+GO
+
+
+select name,salary,
+
+case
+when salary > 5000 then 'High salary'
+else 'low salary'
+end as salaryType
+
+from Employee
+
+select name,salary,
+
+case
+when salary > 5000 and salary <7500 then 'Normal salary'
+when salary > 5000 then 'High salary'
+else 'low salary'
+end as salaryType
+
+from Employee
+
+select name, age,
+case
+when age >= 55 then 'Old employee'
+when age >= 30 AND age < 55 then 'Experienced'
+when age < 30 then 'young employee'
+else 'undefined'
+end
+from employee 
+
+
+-- IIF Function
+declare @marks int = 49
+SELECT IIF(@marks>50, 'Pass', 'Fail');
+GO
+
+select name,salary,
+IIF(salary > 5000, 'High salary', 'Low salary') as SalaryType
+from Employee
+
+declare @marks int = 51
+select
+case
+when @marks>50 then 'Pass'
+else 'Fail'
+end
+
+
+select *, 
+CASE
+	    when age<20 then 'Fresher'
+		when age<40 then 'Young'
+	    when age<60 then 'Middleage'
+	    when age<80 then 'Old'
+	    ELSE 'Very Old'
+END as Case_Column, 
+iif(age > 50, 'Old', 'Young') as IIF_Column
+from Employee
+
+
+
+
+-- what is a scalar value? 
+-- single value
+-- 1,500, 'Name', 'City'
+
+
+-- what is a table value? 
+-- a collection values
+-- (ID, Name, Age)
+
+
+
+
+-- Scaler Function
+create function SumOfTwoValue(@a int, @b int)
+returns int
+
+AS
+BEGIN
+
+declare @c int
+set @c = @a+@b
+return @c
+
+END
+
+select dbo.SumOfTwoValue(100,20) as OP-- schema name is mandetory
+
+
+-- location of a department, user will provide department id as input
+create function Dep_Location(@Dep_ID int)
+returns varchar(24)
+
+AS
+BEGIN
+
+declare @loc varchar(24)
+select @loc = Location from Department where ID = @Dep_ID
+RETURN @loc
+
+END
+
+select dbo.Dep_Location(3) as D_Loc-- schema name is mandetory
+
+
+-- Example: 
+create function TestFunction( @input int) 
+returns varchar(32)
+
+As
+Begin
+
+ return
+  case
+    when @input = 1 then 'Tea'
+	when @input = 2 then 'Coffee'
+	when @input = 3 then 'Milk'
+	when @input = 4 then 'Hot water'
+	else 'Please provide a valid input'
+  end
+
+end
+
+
+
+-- Table Valued Function:
+CREATE function testFun2(@a int)
+returns table
+AS
+RETURN(select * from Employee where ID <= @a)
+GO
+select * from dbo.testFun2(5)
+
+
+CREATE function EmpFunction(@a int)
+returns table
+AS
+RETURN(select ID, Name, Age from Employee where ID <= @a)
+GO
+select * from dbo.EmpFunction(5)
+
+
+CREATE FUNCTION SalaryCategoty(@e_ID int)
+RETURNS TABLE
+AS
+
+RETURN(select name,
+case
+when salary > 5000 and salary <7500 then 'Normal salary'
+when salary > 5000 then 'High salary'
+else 'low salary'
+end as salaryType
+from Employee where ID = @e_ID)
+GO
+select * from dbo.SalaryCategoty(2)
+
+
+
+
+
+
+
+
+
+Class-6: M4P48
+-------------------
+
+-- If Else
+IF Boolean_expression
+BEGIN
+    -- Statement block executes when the Boolean expression is TRUE
+END
+
+else if Boolean_expression
+BEGIN
+    -- Statement block executes when the Boolean expression is TRUE
+END
+
+ELSE
+BEGIN
+    -- Statement block executes when the Boolean expression is FALSE
+END
+
+
+declare @a int = 4
+
+if(@a = 1)
+begin
+ select 'The value of a is: 1'
+end
+else if (@a = 2)
+begin
+ select 'The value of a is: 2'
+end
+else if (@a = 3)
+begin
+ select 'The value of a is: 3'
+end
+Else
+begin
+ select 'We do not know the value of a'
+end
+
+
+-- we have a input variable called age
+-- based on the age, show the output as below
+-- Condition will be based on, if age is more than 18
+-- Eligible to vote as age is: <show the age>
+-- Not Eligible to vote as age is: <show the age>
+
+declare @age tinyint = 25
+
+if @age >= 18 
+begin
+print 'Eligible to vote as age is: ' + cast(@age as varchar(3))
+end
+
+else
+begin
+print 'Not Eligible to vote as age is: ' + cast(@age as varchar(3))
+end
+
+
+
+-- Exist Function
+if EXISTS(select * from Employee where ID = 2)
+begin
+ select 'A value Exist'
+end
+ELSE
+begin
+ select 'A value does not Exist'
+end
+GO
+
+if NOT EXISTS(select * from Employee where ID = 200)
+begin
+ select 'not exist condition is true as the query returns NO output'
+end
+ELSE
+begin
+ select 'not exist condition is false as the query returns output'
+end
+
+
+
+
+
+
+
+
+-- While Loop
+WHILE Boolean_expression   
+Begin
+	sql_statement 
+end
+
+-- infinite loop
+while (1=1)
+begin
+ print 'going crazy!'
+end
+
+
+DECLARE @Counter INT 
+SET @Counter=1
+
+WHILE (@Counter <= 10)
+BEGIN
+    PRINT 'The counter value is = ' + CONVERT(VARCHAR,@Counter)
+    SET @Counter  = @Counter  + 1
+END
+Print 'Out of while loop with counter value: ' + CONVERT(VARCHAR,@Counter)
+GO
+
+
+-- show me the sum of 10 consiquitive values
+-- starting value will be given by the user
+-- use a while loop to get the sum of ten consiquitive values
+-- the output should look like below
+-- Ten consiquitive sum is: <the output>
+-- example: let's say given value is: 5
+-- 5+6+7+8+9+10+11+12+13+14 = 95
+-- Ten consiquitive sum is: 95
+
+DECLARE @startnumber INT = 5
+declare @sumoutput int = 0
+declare @counter int = @startnumber + 9
+
+WHILE (@startnumber <= @counter)
+BEGIN
+	set @sumoutput = @sumoutput + @startnumber
+	PRINT 'The sumout value is = ' + CONVERT(VARCHAR,@sumoutput)
+    SET @startnumber  = @startnumber  + 1
+END
+Print 'Ten consiquitive sum is: ' + CONVERT(VARCHAR,@sumoutput)
+
+
+
+
+
+break -- does not allow rest of while block and whilo loop
+continue -- does not allow rest of while block but allow while loop
+
+
+-- BREAK statement example 
+
+while (1=1)
+begin
+ print 'going crazy!'
+ print 'going crazy!'
+ break
+end
+
+-- Continue statement example
+while 1 = 1
+begin
+	print ' In the loop-before continue' 
+	continue
+	print ' In the loop-after continue' 
+end
+print 'Out of the loop' 
+
+
+
+-- Continue statement example
+DECLARE @Counter INT 
+SET @Counter=1
+
+WHILE (@Counter <= 10)
+BEGIN
+	SET @Counter  = @Counter  + 1
+    PRINT 'The counter value is = ' + CONVERT(VARCHAR,@Counter)
+	continue
+	PRINT 'Copy-1: The counter value is = ' + CONVERT(VARCHAR,@Counter)
+END
+Print 'Out of while loop with counter value: ' + CONVERT(VARCHAR,@Counter)
+GO
+
+
+
+
+
+-- increase the salary of every employee except where salary is more than 10,000
+select * from employee
+
+DECLARE @Counter INT = 1, @salary int = 0
+select @Counter = count(id) from employee 
+WHILE (@Counter >= 1)
+BEGIN
+	select @salary = salary from employee where id = @Counter
+	if @salary >= 10000
+	begin
+		SET @Counter  = @Counter  - 1
+		continue
+	end
+	update employee set salary = salary + 10 where id = @Counter
+    SET @Counter  = @Counter  - 1
+END
+
+
+
+-- Factorial example(!5 = 5*4*3*2*1)
+
+DECLARE @Counter INT = 5, @Fact int = 1
+
+WHILE (@Counter >= 1)
+BEGIN
+    SET @Fact = @Fact * @Counter
+	SET @Counter  = @Counter  - 1
+END
+
+Print 'The factorial is: ' + CONVERT(VARCHAR,@Fact)
+GO
+
+
+-- please write a sql programming to find the factorial of a given value using while loop
+-- wrap it in a scaler function
+create function FindFactorial(@Counter int)
+returns int
+as
+begin
+DECLARE @Fact int = 1
+WHILE (@Counter >= 1)
+BEGIN
+    SET @Fact = @Fact * @Counter
+	SET @Counter  = @Counter  - 1
+END
+return @Fact
+end
+
+select dbo.FindFactorial(4) as Factorial
+
+
+
+
+
+DECLARE @Counter INT 
+SET @Counter=1
+
+WHILE (@Counter <= 10)
+BEGIN
+    PRINT 'The counter value is = ' + CONVERT(VARCHAR,@Counter)
+	IF(@Counter=5)
+	BEGIN
+		Print 'Counter value is 5 and got the break statement'
+		BREAK
+	END
+    SET @Counter  = @Counter  + 1
+END
+Print 'Out of while loop with counter value: ' + CONVERT(VARCHAR,@Counter)
+GO
+
+
+
+
+
+
+
+-- Order by clause
+select * from person order by name asc -- default is asc
+select * from person order by name desc
+select * from person order by name,Address asc
+
+-- Top statement
+select top 2 * from person
+select top 2 PID, NAME, Address from person 
+select top 2 * from employee order by salary desc
+select top 5 * from Employee
+-- please show me the details of oldest three employees in our company 
+select top 3 * from Employee order by age desc
+
+-- please show the name, age and salary of the youngest employee in the company
+select top 1 Name, Age, Salary from Employee order by Age ASC
+
+select top 25 percent * from person -- to get 25% records of the table
+select top 50 percent * from person -- to get 50% records of the table
+
+
+-- show the 50% records of persons who is having B+ blood group 
+Select top 50 percent * from person where BloodGroup= 'B+'
+
+
+
+-- group by: 
+-- The average salary of male and female employees 
+SELECT Gender, AVG(Salary) AS TotalSalary
+FROM Employee
+GROUP BY Gender
+GO
+
+-- The number of employees in each country 
+SELECT Country, count(ID) as number_of_employee
+FROM Employee
+GROUP BY Country
+GO
+
+
+-- The total salary, average salary, number of employees of male and female employees 
+SELECT Gender, 
+SUM(Salary) AS TotalSalary, 
+AVG(Salary) AS AverageSalary, 
+COUNT(ID) AS NumberOfEmployees
+FROM Employee
+GROUP BY Gender
+GO
+
+-- total salary, average salary, employee count of  employees of each country.
+select 
+country, 
+sum(salary) as Total_Salary, 
+avg(salary) as Average_Salary, 
+count(id) as Employee_Count
+from employee 
+group by country
+Order by count(id) ASC
+
+
+-- Example:
+SELECT Gender, AVG(Salary) as agerageSalary, count(ID) as employeecount, sum(salary) as totalSalary
+FROM Employee
+GROUP BY Gender
+GO
+
+SELECT country, AVG(Salary) as agerageSalary, count(ID) as employeecount, sum(salary) as totalSalary
+FROM Employee
+GROUP BY gender
+GO
+
+
+
+
+
+
+-- Group By Having 
+-- show me only those details where total salary is more than 12000
+SELECT Country, SUM(Salary) AS TotalSalary
+FROM Employee
+GROUP BY Country
+having sum(salary) > 12000
+
+
+SELECT Country, SUM(Salary) AS TotalSalary
+FROM Employee
+GROUP BY Country
+HAVING Country = 'INDIA'
+
+SELECT Country, SUM(Salary) AS TotalSalary
+FROM Employee
+GROUP BY Country
+HAVING SUM(Salary) > 10000
+
+SELECT Country, SUM(Salary) AS TotalSalary
+FROM Employee
+GROUP BY Country
+order by SUM(Salary) DESC
+
+SELECT Country, SUM(Salary) AS TotalSalary
+FROM Employee
+where country <> 'India'
+GROUP BY Country
+having SUM(Salary) > 12000
+order by SUM(Salary) DESC
+
+
+
+--> where
+--> group by
+--> having
+--> order by
+SELECT Country, SUM(Salary) AS TotalSalary
+FROM Employee
+where country in ('USA', 'INDIA', 'UK')
+GROUP BY Country
+having sum(salary) > 12000
+order by TotalSalary
+
+
+-- second highest salary using top clause
+select top 1 * from employee where salary <
+(select top 1 salary from employee order by salary desc)
+order by salary desc 
+
+
+
+
+-- join: Join is used to map rows of two different table using a common column
+-- Union: Union is used to append results of two different select operations. 
+
+
+-- Union
+select * from Employee where Country = 'INDIA'
+UNION
+select * from Employee where Country = 'USA'
+GO
+
+-- Union All
+select * from Employee 
+UNION ALL
+select * from Employee 
+
+-- EXCEPT Operator
+select * from Employee where Country in ('INDIA', 'UK')
+EXCEPT 
+select * from Employee where Country = 'INDIA'
+EXCEPT 
+select * from Employee where Country = 'UK'
+
+-- INTERSECT Operator
+select * from Employee where Country in ('INDIA', 'UK')
+INTERSECT 
+select * from Employee where Country in ('INDIA', 'USA')
+
+
+
+
+
+
+
+
+
+
+
+Class-7: Practical M6P1
+-------------------------- 
+
+-- Basic structure of Stored Procedure 
+CREATE PROCEDURE HelloWorldprocedure
+AS
+BEGIN
+	PRINT 'Hello World'
+END
+
+exec HelloWorldprocedure
+
+
+-- Function: To take single/multiple input and provide a output. 
+--           To implement small business logic/ perform small tasks. 
+
+-- Procedure: It may/ may not take input, however it will implement logic. 
+--            To implement complex business logics and update database if needed. 
+
+
+-- Difference between function and stored procedure: 
+-- Function is for simple task, SP is for complex tasks. 
+-- Function must return a value, SP may not return any value. 
+-- Function can not call a SP, however, a SP can call a function.  
+
+
+-- Basic structure of Stored Procedure 
+CREATE PROCEDURE Sum_Of_Two_Inputs 
+@a int, @b int
+AS
+BEGIN
+	declare @c int = 0
+	set @c = @a + @b
+	PRINT 'The output is: ' + cast(@c as varchar(16))
+END
+
+
+-- please find the factorial of a given value 
+-- example: 
+!5 = 5*4*3*2*1 = 120
+!6 = 6*5*4*3*2*1 = 720
+
+-- we need to take a input from user about the factorial value 
+-- we can use while loop in decreasing counter to find the factorial
+-- once the loop is over and factorial is calculated, we can print the output 
+
+CREATE PROCEDURE Find_Factorial
+@Factorial_input int 
+AS
+BEGIN
+declare @Factorial_output bigint = 1
+
+while @Factorial_input >= 1
+BEGIN
+	set @Factorial_output = @Factorial_output * @Factorial_input
+	set @Factorial_input = @Factorial_input - 1
+END
+print 'The factorial is: ' + CAST(@Factorial_output as varchar(16))
+END
+
+
+-- Factorial example(!5 = 5*4*3*2*1)
+-- Logic behing factorial code: 
+-- The input of the user --> Input parameter
+-- A place to store intermidiate calculated value --> variable in the program (@fact)
+-- We need to run a loop to calculate the factorial --> While loop
+-- We need to implement logic to calculate the factorial --> In while loop body 
+-- Once loop is over, intermidiate variable is holding the result
+-- We need to print out result 
+
+5*4*3*2*1
+20*3*2*1
+60*2*1
+120*1
+120
+
+ALTER PROCEDURE Factorial 
+@Counter int
+AS
+BEGIN
+	DECLARE @Fact int = 1, @initValue int = @Counter
+	WHILE (@Counter >= 1)
+	BEGIN
+		SET @Fact = @Fact * @Counter
+		SET @Counter  = @Counter  - 1
+	END
+	PRINT 'The factorial of ' + CONVERT(VARCHAR,@initValue) + ' is: ' + CONVERT(VARCHAR,@Fact)
+END
+
+exec Factorial 6
+
+-- example of a procedure calling a function
+-- function
+CREATE function [dbo].[TestFunction]( @input int) 
+returns varchar(32)
+
+As
+Begin
+
+ return
+  case
+    when @input = 1 then 'Tea'
+	when @input = 2 then 'Coffee'
+	when @input = 3 then 'Milk'
+	when @input = 4 then 'Hot water'
+	else 'Please provide a valid input'
+  end
+
+end
+
+-- procedure calling the function
+create procedure VendingMachine
+@input int
+as
+begin
+declare @functionOP varchar(32)
+select @functionOP =  dbo.TestFunction (@input)
+print 'The output for the given value is: ' + @functionOP
+end
+
+-- calling the procedure
+-- exec VendingMachine 2
+
+
+
+
+-- To save program code in the database: In the form of database objects
+
+-- Function: to save small business logic
+-- Procedure: to save complex business logic
+-- View: to save simple/complex select statements
+
+
+
+--Example Of Create View: 
+CREATE view Employee_Gender
+as
+SELECT Gender, 
+SUM(Salary) AS TotalSalary, 
+AVG(Salary) AS AverageSalary, 
+COUNT(ID) AS NumberOfEmployees
+FROM Employee
+GROUP BY Gender
+go
+
+select * from Employee_Gender where NumberOfEmployees > 4
+
+
+
+CREATE VIEW JoinView
+AS
+Select c.name,c.mobile,o.item,o.amount from 
+Customerdetails as c
+Inner join
+Orderdetails as o
+On c.cid = o.cid
+where o.amount >= 50
+GO
+
+
+-- Example of Alter View
+Alter view JoinView
+as
+SELECT  
+    c.id as candidate_id,
+    c.fullname as candidate_name,
+    e.id as employee_id,
+    e.fullname as employee_name
+FROM 
+    hr.candidates as c
+    INNER JOIN hr.employees as e 
+        ON e.fullname = c.fullname
+WHERE c.fullname Like 'J%'
+GO
+
+-- Example of Delete View
+DROP View JoinView
+
+
+
+-- Different ways to save code in the database:
+-- Function (Scalar/Table): Performing some small operation. 
+-- Stored Procedure: Implementing big programming logics into code.
+-- View: It is a way to store select query, logical table of query output.
+
+
+
+
+
+
+
+TCL - Transaction Control Language 
+-- DML operation -- insert / update / delete 
+Begin Tran -- It indicates start of a transaction 
+DML operation -- insert / update / delete 
+Commit     -- To save the transaction changes permanently
+Rollback   -- To undo the transactional changes
+
+-- Rollback: the last transaction will be reverted. 
+-- Commit: The last transaction will be saved permanently. 
+-- Note: We can either perform commit or rollback against begin tran
+-- Note: Once rollback, we can not commit... and vice versa 
+-- Note: By default SQL performs implicit commit transaction. 
+
+-- Example: 
+-- Begin Tran
+-- Transactions(Insert/update/delete)
+-- Commit/Rollback
+
+
+-- TCL example with insert/update/delete operation
+create table test
+(
+ID int,
+name varchar(24)
+)
+
+select * from test 
+
+insert into test values (3,'John')
+
+begin tran
+insert into test values (2,'Geetha')
+commit
+
+begin tran
+delete from test 
+commit
+
+
+
+-- runtime error -- we did not see any error in coding 
+-- but, during execution we encountered an error
+select 'One' + 100
+select 100/0
+
+
+
+-- Exception handeling 
+Begin Try
+	-- SQL Statements
+End Try
+Begin Catch
+	-- Error handeling 
+End Catch
+
+
+BEGIN TRY  
+    -- Generate a divide-by-zero error.  
+    SELECT 1/0;  
+END TRY  
+BEGIN CATCH  
+    select 'Please use value except zero for divide'
+END CATCH;  
+GO 
+
+begin try 
+	select 123 + '-' + 'abc'
+	select 'executed successfully'
+end try
+begin catch 
+	select 'use same data type for concat operation'
+	select ERROR_MESSAGE()
+end catch 
+
+
+
+BEGIN TRY  
+    -- Generate a divide-by-zero error.  
+    SELECT 1/0;  
+END TRY  
+BEGIN CATCH  
+    SELECT  
+        ERROR_NUMBER() AS ErrorNumber  
+        ,ERROR_MESSAGE() AS ErrorMessage
+		, 'Please use value except zero for divide' as HowToFix
+END CATCH;  
+GO 
+
+
+
+
+
+-- TCL: begin tran, commit, rollback
+
+begin tran 
+delete from hr.candidates where fullname = 'Debu'
+-- commit -- (Save Transaction)
+-- rollback -- (Dont Save Transaction)
+
+begin tran
+-- DML operation
+	begin tran
+	-- DML operation
+	commit
+commit
+
+
+-- Transaction with Try catch block
+BEGIN TRY  
+    BEGIN TRAN
+		select 1/1
+	COMMIT
+	SELECT 'Transaction Committed!'
+END TRY  
+
+BEGIN CATCH  
+    ROLLBACK
+	SELECT 'Transaction Rollbacked as we encountered an error in Try Block!'
+END CATCH;  
+GO 
+
+
+
+select * from person
+-- Transaction with Try catch block
+BEGIN TRY  
+    BEGIN TRAN
+		insert into person values ('abc','abc', 'Prabakaran', 'Pune', '2000-01-15','abc')
+	COMMIT
+	print 'Transaction Committed!'
+END TRY  
+
+BEGIN CATCH  
+    ROLLBACK
+	print 'Transaction Rollbacked as we encountered an error in Try Block!'
+END CATCH;   
+
+
+-- the use of catch block is to prevent application crash
+-- and pass a meaninful message to enduser that
+-- why the previous action could not be performed
+
+
+
+
+
+-- Live assignment: 
+-- show me the name and age of the most senior employee 
+-- The output should look like below: 
+-- Name: <most senior employee name> & Age: <Age of the employee>
+-- For example if name is 'ABC' and Age is '50' then output should be
+-- Name: ABC & Age: 50 
+-- Name: Jhon & Age: 55 
+
+select 
+top 1 'Name: ' + name + ' & Age: ' + convert(varchar(2), age) 
+from Employee 
+order by age desc
+-- write a query to see average employee age, average salary of every country
+
+
+
+
+
+
+-- Rank Functions
+ROW_NUMBER() - We use this function to get a unique sequential number for each row in the specified data. 
+RANK()	 - We use this function to specify rank for each row in the result set. It may/may not skip Ranking values.
+DENSE_RANK() - We use this function to specify a unique rank number within the partition as per the specified column value.
+NTILE()      - We use this function to distribute the number of rows in the specified number of ranks based on the ntile value. 
+
+-- Creating environment
+
+CREATE TABLE ExamResult
+(StudentName VARCHAR(70), 
+ Subject     VARCHAR(20), 
+ Marks       INT
+);
+INSERT INTO ExamResult
+VALUES
+('Lily', 
+ 'Maths', 
+ 65
+);
+INSERT INTO ExamResult
+VALUES
+('Lily', 
+ 'Science', 
+ 80
+);
+INSERT INTO ExamResult
+VALUES
+('Lily', 
+ 'english', 
+ 70
+);
+INSERT INTO ExamResult
+VALUES
+('Isabella', 
+ 'Maths', 
+ 50
+);
+INSERT INTO ExamResult
+VALUES
+('Isabella', 
+ 'Science', 
+ 70
+);
+INSERT INTO ExamResult
+VALUES
+('Isabella', 
+ 'english', 
+ 90
+);
+INSERT INTO ExamResult
+VALUES
+('Olivia', 
+ 'Maths', 
+ 55
+);
+INSERT INTO ExamResult
+VALUES
+('Olivia', 
+ 'Science', 
+ 60
+);
+INSERT INTO ExamResult
+VALUES
+('Olivia', 
+ 'english', 
+ 89
+);
+
+
+-- Row_Number function
+SELECT Studentname, 
+       Subject, 
+       Marks, 
+       ROW_NUMBER() OVER(ORDER BY Marks desc) RowNumber
+FROM ExamResult;
+GO
+
+SELECT Studentname, 
+       Subject, 
+       Marks, 
+       ROW_NUMBER() OVER(Partition by subject ORDER BY Marks desc) RowNumber
+FROM ExamResult;
+GO
+
+-- Example: 
+SELECT Studentname, 
+       Subject, 
+       Marks, 
+       RANK() OVER(ORDER BY Marks DESC) Rank, 
+	   DENSE_RANK() OVER(ORDER BY Marks DESC) DenseRank, 
+	   ROW_NUMBER() OVER(ORDER BY Marks DESC) RowNumber
+FROM ExamResult
+
+
+-- Rank function
+SELECT Studentname, 
+       Subject, 
+       Marks, 
+       RANK() OVER(PARTITION BY Studentname ORDER BY Marks DESC) Rank
+FROM ExamResult
+ORDER BY Studentname, Rank;
+GO
+
+SELECT Studentname, 
+       Subject, 
+       Marks, 
+       RANK() OVER(ORDER BY Marks DESC) Rank
+FROM ExamResult
+ORDER BY Rank;
+
+
+
+-- Dense_Rank function
+SELECT Studentname, 
+       Subject, 
+       Marks, 
+       DENSE_RANK() OVER(ORDER BY Marks DESC) Rank
+FROM ExamResult
+ORDER BY Rank;
+GO
+
+SELECT Studentname, 
+       Subject, 
+       Marks, 
+       DENSE_RANK() OVER(PARTITION BY Subject ORDER BY Marks DESC) Rank
+FROM ExamResult
+ORDER BY Subject, Rank;
+
+
+-- Note: Rank function skip some rank values based on the number of repetations. 
+-- 	     However, Dense_Rank function does not skip any ranking values in the output. 
+
+
+-- NTile function
+SELECT *, 
+       NTILE(2) OVER(ORDER BY Marks DESC) Rank
+FROM ExamResult
+ORDER BY rank;
+GO
+
+SELECT *, 
+       NTILE(3) OVER(ORDER BY Marks DESC) Rank
+FROM ExamResult
+ORDER BY rank;
+GO
+
+SELECT *, 
+       NTILE(2) OVER(PARTITION  BY subject ORDER BY Marks DESC) Rank
+FROM ExamResult
+ORDER BY subject, rank;
+GO
+
+-- Difference between Rank & Dense_Rank
+Rank may have missing ranking numbers based on number of ties
+Dense_Rank will not give any missing rank even if there are ties 
+
+
+
+-- zomato: use case 
+select *, 
+     ntile(3) over(order by amount desc) as ordercategory
+	 into #t
+from OrderDetails
+
+select * from CustomerDetails where cid in
+(select cid from #t where ordercategory = 1)
+
+-- you can offer them some reward point as loyalty bonus 
+
+
+
+

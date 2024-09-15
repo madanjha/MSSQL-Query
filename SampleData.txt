@@ -1,0 +1,153 @@
+
+/************************ Create Sample Table & Data *********************************/
+CREATE TABLE [dbo].[Person]
+(
+	[PID] [int] NOT NULL PRIMARY KEY,
+	[Name] [varchar](32) NOT NULL,
+	[Address] [varchar](64) NOT NULL,
+	[MobileNumber] [int] NOT NULL,
+	[DOB] [date] NULL,
+	[BloodGroup] [varchar](4) NULL
+)
+GO
+CREATE TABLE [dbo].[Employee]
+(
+	[ID] [int] NOT NULL PRIMARY KEY,
+	[Name] [varchar](64) NOT NULL,
+	[Salary] [int] NOT NULL,
+	[Age] [int] NOT NULL,
+	[Gender] [varchar](16) NULL,
+	[Dept] [varchar](50) NULL
+)
+GO
+CREATE TABLE [dbo].[Department]
+(
+	[ID] [int] NOT NULL PRIMARY KEY,
+	[Name] [varchar](50) NOT NULL,
+	[Location] [varchar](50) NOT NULL
+)
+GO
+CREATE TABLE [dbo].[CustomerDetails]
+(
+	[CID] [int] NOT NULL PRIMARY KEY,
+	[Name] [varchar](64) NOT NULL,
+	[Age] [int] NOT NULL,
+	[Mobile] [varchar](12) NOT NULL
+)
+GO
+CREATE TABLE [dbo].[OrderDetails]
+(
+	[OID] [int] NOT NULL PRIMARY KEY,
+	[Item] [varchar](32) NOT NULL,
+	[Amount] [int] NOT NULL,
+	[Notes] [varchar](256) NULL,
+	[CID] [int] NOT NULL
+)
+GO
+
+
+
+INSERT [dbo].[Department] ([ID], [Name], [Location]) VALUES (1, N'Content', N'Delhi')
+GO
+INSERT [dbo].[Department] ([ID], [Name], [Location]) VALUES (2, N'Operations', N'New York')
+GO
+INSERT [dbo].[Department] ([ID], [Name], [Location]) VALUES (3, N'Sales', N'Mumbai')
+GO
+INSERT [dbo].[Department] ([ID], [Name], [Location]) VALUES (4, N'Tech', N'New York')
+GO
+INSERT [dbo].[Department] ([ID], [Name], [Location]) VALUES (5, N'Analytics', N'Kolkata')
+GO
+INSERT [dbo].[Employee] ([ID], [Name], [Salary], [Age], [Gender], [Dept]) VALUES (1, N'Sam', 10400, 52, N'M', N'Operations')
+GO
+INSERT [dbo].[Employee] ([ID], [Name], [Salary], [Age], [Gender], [Dept]) VALUES (2, N'Bob', 7010, 28, N'M', N'Support')
+GO
+INSERT [dbo].[Employee] ([ID], [Name], [Salary], [Age], [Gender], [Dept]) VALUES (3, N'Julia', 5010, 29, N'F', N'Analytics')
+GO
+INSERT [dbo].[Employee] ([ID], [Name], [Salary], [Age], [Gender], [Dept]) VALUES (4, N'Anne', 8010, 32, N'F', N'Analytics')
+GO
+INSERT [dbo].[Employee] ([ID], [Name], [Salary], [Age], [Gender], [Dept]) VALUES (5, N'Matt', 5110, 34, N'M', N'Sales')
+GO
+INSERT [dbo].[Employee] ([ID], [Name], [Salary], [Age], [Gender], [Dept]) VALUES (6, N'Asma', 7410, 28, N'F', N'Operations')
+GO
+INSERT [dbo].[Employee] ([ID], [Name], [Salary], [Age], [Gender], [Dept]) VALUES (7, N'Piyush', 9110, 31, N'M', N'Sales')
+GO
+INSERT [dbo].[Employee] ([ID], [Name], [Salary], [Age], [Gender], [Dept]) VALUES (8, N'Anne', 9100, 35, N'F', N'Sales')
+GO
+INSERT [dbo].[Employee] ([ID], [Name], [Salary], [Age], [Gender], [Dept]) VALUES (9, N'Swati', 7510, 25, N'F', N'Support')
+GO
+INSERT [dbo].[Employee] ([ID], [Name], [Salary], [Age], [Gender], [Dept]) VALUES (10, N'Jhon', 6610, 55, N'M', N'Analytics')
+GO
+INSERT [dbo].[Person] ([PID], [Name], [Address], [MobileNumber], [DOB], [BloodGroup]) VALUES (1, N'Ashok', N'Delhi', 1234, CAST(N'2000-01-15' AS Date), N'A+')
+GO
+INSERT [dbo].[Person] ([PID], [Name], [Address], [MobileNumber], [DOB], [BloodGroup]) VALUES (2, N'Sundar', N'Pune', 4321, CAST(N'2001-01-15' AS Date), N'AB+')
+GO
+INSERT [dbo].[Person] ([PID], [Name], [Address], [MobileNumber], [DOB], [BloodGroup]) VALUES (3, N'Askshat', N'Mumbai', 9999, CAST(N'1985-01-15' AS Date), N'B+')
+GO
+INSERT [dbo].[Person] ([PID], [Name], [Address], [MobileNumber], [DOB], [BloodGroup]) VALUES (4, N'Sushmita Yadav', N'Kolkata', 6666, CAST(N'2002-01-15' AS Date), N'O+')
+GO
+INSERT [dbo].[Person] ([PID], [Name], [Address], [MobileNumber], [DOB], [BloodGroup]) VALUES (5, N'Priya', N'Goa', 2341, CAST(N'1995-01-15' AS Date), N'B+')
+GO
+INSERT [dbo].[Person] ([PID], [Name], [Address], [MobileNumber], [DOB], [BloodGroup]) VALUES (6, N'Rohan', N'Patna', 2341, CAST(N'1995-01-15' AS Date), N'B+')
+GO
+INSERT [dbo].[Person] ([PID], [Name], [Address], [MobileNumber], [DOB], [BloodGroup]) VALUES (7, N'''Syed', N'Mumbai', 2341, CAST(N'1995-01-15' AS Date), N'B+')
+GO
+INSERT [dbo].[Person] ([PID], [Name], [Address], [MobileNumber], [DOB], [BloodGroup]) VALUES (8, N'Vidish', N'Punjab', 55667, CAST(N'2005-05-15' AS Date), N'B+')
+GO
+INSERT [dbo].[Person] ([PID], [Name], [Address], [MobileNumber], [DOB], [BloodGroup]) VALUES (9, N'Swapnil', N'Kolkata', 32145, CAST(N'1989-06-01' AS Date), N'A+')
+GO
+INSERT [dbo].[Person] ([PID], [Name], [Address], [MobileNumber], [DOB], [BloodGroup]) VALUES (10, N'Devika', N'Patna', 65434, CAST(N'1995-09-10' AS Date), N'A+')
+GO
+INSERT [dbo].[Person] ([PID], [Name], [Address], [MobileNumber], [DOB], [BloodGroup]) VALUES (11, N'Neha', N'Pune', 2654, NULL, NULL)
+GO
+INSERT [dbo].[Person] ([PID], [Name], [Address], [MobileNumber], [DOB], [BloodGroup]) VALUES (12, N'Radhika''s', N'Bangalore', 34521, CAST(N'2002-01-15' AS Date), N'O-')
+GO
+INSERT [dbo].[Person] ([PID], [Name], [Address], [MobileNumber], [DOB], [BloodGroup]) VALUES (13, N'Radhika''''s', N'Bangalore', 34521, CAST(N'2002-01-15' AS Date), N'O-')
+GO
+INSERT [dbo].[Person] ([PID], [Name], [Address], [MobileNumber], [DOB], [BloodGroup]) VALUES (14, N'Ashok', N'Kolkata', 9831, CAST(N'1994-04-03' AS Date), N'AB+')
+GO
+INSERT [dbo].[Person] ([PID], [Name], [Address], [MobileNumber], [DOB], [BloodGroup]) VALUES (15, N'Test%Case', N'TestAddress', 12345, CAST(N'2002-01-15' AS Date), N'O-')
+GO
+INSERT [dbo].[Person] ([PID], [Name], [Address], [MobileNumber], [DOB], [BloodGroup]) VALUES (30, N'Askshat', N'Mumbai', 9999, CAST(N'2002-01-15' AS Date), N'B+')
+GO
+INSERT [dbo].[Person] ([PID], [Name], [Address], [MobileNumber], [DOB], [BloodGroup]) VALUES (40, N'Shushmita Yadav', N'Kolkata', 6666, CAST(N'2002-01-15' AS Date), N'O+')
+GO
+INSERT [dbo].[Person] ([PID], [Name], [Address], [MobileNumber], [DOB], [BloodGroup]) VALUES (50, N'Priya', N'Goa', 2341, CAST(N'1995-01-15' AS Date), N'B+')
+GO
+INSERT [dbo].[Person] ([PID], [Name], [Address], [MobileNumber], [DOB], [BloodGroup]) VALUES (51, N'abc', N'abc', 123, CAST(N'2000-01-15' AS Date), N'a+')
+GO
+INSERT [dbo].[Person] ([PID], [Name], [Address], [MobileNumber], [DOB], [BloodGroup]) VALUES (52, N'abc', N'abc', 123, CAST(N'2000-01-15' AS Date), N'a+')
+GO
+INSERT [dbo].[Person] ([PID], [Name], [Address], [MobileNumber], [DOB], [BloodGroup]) VALUES (60, N'Raaja', N'Noida', 6754, CAST(N'2005-05-23' AS Date), N'O+')
+GO
+INSERT [dbo].[CustomerDetails] ([CID], [Name], [Age], [Mobile]) VALUES (1, N'Rahul', 28, N'12345')
+GO
+INSERT [dbo].[CustomerDetails] ([CID], [Name], [Age], [Mobile]) VALUES (2, N'Nadar', 29, N'34567')
+GO
+INSERT [dbo].[CustomerDetails] ([CID], [Name], [Age], [Mobile]) VALUES (3, N'Yogita', 27, N'98765')
+GO
+INSERT [dbo].[CustomerDetails] ([CID], [Name], [Age], [Mobile]) VALUES (4, N'Debabrata', 34, N'77788')
+GO
+INSERT [dbo].[CustomerDetails] ([CID], [Name], [Age], [Mobile]) VALUES (6, N'Meha', 28, N'776655')
+GO
+INSERT [dbo].[OrderDetails] ([OID], [Item], [Amount], [Notes], [CID]) VALUES (10, N'Idli', 50, NULL, 3)
+GO
+INSERT [dbo].[OrderDetails] ([OID], [Item], [Amount], [Notes], [CID]) VALUES (11, N'Dhosa', 90, N'extra chutni', 1)
+GO
+INSERT [dbo].[OrderDetails] ([OID], [Item], [Amount], [Notes], [CID]) VALUES (12, N'Samosa', 30, N'extra chutni', 4)
+GO
+INSERT [dbo].[OrderDetails] ([OID], [Item], [Amount], [Notes], [CID]) VALUES (15, N'Biriyani', 350, N'Salad', 2)
+GO
+INSERT [dbo].[OrderDetails] ([OID], [Item], [Amount], [Notes], [CID]) VALUES (16, N'Momo', 120, N'Extra Soup', 7)
+GO
+INSERT [dbo].[OrderDetails] ([OID], [Item], [Amount], [Notes], [CID]) VALUES (17, N'Momo', 120, N'Extra Soup', 7)
+GO
+
+select * from Person
+select * from Employee
+select * from Department
+select * from CustomerDetails
+select * from OrderDetails
+GO
+
+/*************************************************************************************/
+

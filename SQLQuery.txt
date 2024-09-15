@@ -1,0 +1,320 @@
+use SQLBatch
+
+Create Table Person
+(
+PID INT NOT NULL, 
+Name varchar(32) NOT NULL, 
+Address varchar(64) NOT NULL, 
+DOB Date NULL, 
+Primary Key(PID)
+)
+
+insert into person (pid, name, address, dob)
+values(1,'Mahesh', 'Pune', '2000-01-15')
+insert into person 
+values(2,'Asma', 'Mumbai', '2002-02-10')
+insert into person 
+values
+(3,'Nadaf', 'Kolkata', '2005-02-10'),
+(4,'Amit', 'Goa', NULL),
+(5,'Ekwulu', 'Ranchi', '2002-02-10'),
+(6,'Asma', 'Pune', NULL)
+insert into person (pid, name, address)
+values(7,'Asma', 'Pune')
+
+create table EmployeeDetails
+(
+E_Id int,
+E_Name varchar(32),
+E_Address varchar(64),
+E_age int
+)
+INSERT INTO EmployeeDetails(E_ID,E_Name, E_Address, E_Age) 
+VALUES
+  (1, 'Dave', 'Pune', 20),
+  (2, 'Disha', 'Mumbai', 31),
+  (3, 'Tom', 'Delhi', 45),
+  (4, 'Liza', 'Thane', 23),
+  (5, 'Harry', 'Aurangabad', 36)
+
+ select * from EmployeeDetails
+
+INSERT INTO EmployeeDetails VALUES
+(1,'SANTHOSH','KOLKATA',43),
+(2,'THAMAN','CHENNAI',26),
+(3,'HARSH','BANGALORE',40),
+(4,'SAMHITH','DELHI',26),
+(5,'SAMARTH','KANPUR',24)
+
+concat/or cast both is valid.
+
+declare @age int = 18
+if(@age >= 18)
+begin
+select 'eligible to vote as age '+ CAST(@age AS VARCHAR(10))
+select concat('eligible to vote as age ',@age)
+end
+else if(@age < 18)
+begin 
+select  'Noteligible to vote as age '+ CAST(@age AS VARCHAR(10)) 
+select concat('Not eligible to vote as age ',@age)
+end
+Else
+begin
+select 'value of age not knows '
+end
+
+Declare @count int=5,@sum int =0
+while (@count <=14)
+Begin
+SET @sum = @sum+@count;
+SET  @count= @count+1;
+end
+print 'sum of 10 consuctive number'+CONVERT(VARCHAR,@sum)
+
+Declare @facrotialnum int=5,@factorial int =1
+while (@facrotialnum >0)
+Begin
+SET @factorial = @factorial*@facrotialnum;
+SET  @facrotialnum = @facrotialnum -1;
+end
+print 'factorial of given number'+CONVERT(VARCHAR,@factorial)
+
+
+select * from Employee
+GO
+select Top 3* from Employee order by age desc;
+GO
+select Top 3* from Employee order by Salary asc;
+
+
+declare @age int = 18
+if(@age >= 18)
+begin
+select 'eligible to vote as age '+ CAST(@age AS VARCHAR(10))
+select concat('eligible to vote as age ',@age)
+end
+else if(@age < 18)
+begin 
+select  'Noteligible to vote as age '+ CAST(@age AS VARCHAR(10)) 
+select concat('Not eligible to vote as age ',@age)
+end
+Else
+begin
+select 'value of age not knows '
+end
+
+
+
+declare @age int = 18
+if(@age >= 18)
+begin
+select 'eligible to vote as age '+ CAST(@age AS VARCHAR(10))
+select concat('eligible to vote as age ',@age)
+end
+else if(@age < 18)
+begin 
+select  'Noteligible to vote as age '+ CAST(@age AS VARCHAR(10)) 
+select concat('Not eligible to vote as age ',@age)
+end
+Else
+begin
+select 'value of age not knows '
+end
+
+select name,Salary,Age from employee;
+
+Declare @count int=5,@sum int =0
+while (@count <=14)
+Begin
+SET @sum = @sum+@count;
+SET  @count= @count+1;
+end
+print 'sum of 10 consuctive number'+CONVERT(VARCHAR,@sum)
+
+Declare @facrotialnum int=5,@factorial int =1
+while (@facrotialnum >0)
+Begin
+SET @factorial = @factorial*@facrotialnum;
+SET  @facrotialnum = @facrotialnum -1;
+end
+print 'factorial of given number'+CONVERT(VARCHAR,@factorial)
+
+select * from Employee
+GO
+select Top 3* from Employee order by age desc;
+GO
+select Top 3* from Employee order by Salary asc;
+
+create table student (rollno int,name varchar(25), couresename varchar(25), age int check(age>=18));
+
+==================================
+
+create table customer(customer_id int, 
+first_name varchar(20),last_name varchar(20),email varchar(50), address varchar(100),
+city varchar(20),states varchar(10),zip_code varchar(10));
+
+insert into customer values(5,'ramu', 'kumar','rami@gmail.com', 'gridi colony','saran','up','8400056');
+
+select * from customer;
+
+update customer set customer_id=3 where first_name='gopal'
+
+insert into customer values
+(6	,'Sachin', ' kumar','	sk@gmail.com','	Ramnagar','		chennai	','	Tamilnadu','		600001'),
+(7	,'shyam	', ' kumar','	skumar@gmail.com','		trpinagar	','	madhubani	','	bihar','		8400001'),
+(8	,'gopal	', ' shina','	gk@gmail.com	','	patna colony','		pata','		bihar','		8400023'),
+(9	,'gopi	', ' shina','	gopi@gmail.com','	trihut colony','	darbhanga','	bihar','	8400017'),
+(10	,'ramu	', 'kumar','rami@gmail.com','	gridi colony','	saran','	up','	8400056')
+
+select * from customer where first_name like 'S%' and city='chennai';
+
+select * from customer where email like'%@gmail.com';
+
+select * from customer where last_name Not like '%a';
+
+
+
+create table Order1 (orderid int Primary key, customerId int,drderdate date,amount int)
+insert into Order1 values
+(5001,	2345,'2021-07-01',	550.00),
+(5003,	1234,'2022-02-15',	1500.00),
+(5002,	2347,'2021-07-01',	150.00),
+(5004,	1238,'2022-02-15',	120.00),
+(5005,	2349,'2021-07-01',	250.00),
+(5006,	1236,'2022-02-15',	100.00)
+
+select * from Order1;
+GO
+select * from Customer;
+
+update Order1 set customerId=1 where orderid=5001
+
+select Customer.customer_id, Customer.first_name, Customer.last_name, Order1.orderid from Customer
+INNER JOIN 
+Order1 ON Customer.customer_id=Order1.customerid;
+
+=========================
+select min(amount) as minamount from Order2;
+go
+select max(amount)  as maxamount from Order2;
+go
+select avg(amount)  as avgamount from Order2;
+select min(amount) as minamount,max(amount)  as maxamount,avg(amount)  as avgamount from Order2;
+
+create function dbo.multBy10(@inputnum int)
+returns int
+as 
+BEGIN
+return @inputnum*10;
+end
+
+select dbo.multBy10(7);
+
+Declare @intput int=100
+select 
+case 
+	when @intput >200 then 'greter then 200'
+	when @intput =200 then 'equal to 200'
+	when @intput <200 then 'less then 200'
+end
+
+Declare @intput int=100
+select 
+case 
+	when @intput >200 then 'greter then 200'
+	when @intput <200 then 'less then 200'
+	else 'equals'
+end
+
+select amount,
+ case 
+	when amount > 200 and amount < 500 then 'medium'
+	when amount > 500 and amount < 2000 then 'high'
+	else 'low'
+ end as amountcategory
+from Order2; 
+
+
+create function greaterval(@input int)
+returns table
+as
+RETURN(select * from Order2 where amount > @input)
+
+select * from dbo.greaterval(500);
+
+select * from Order2 dense_rank() over(Order by amount) as rank where rank = 2
+
+select CONVERT(decimal(4,2), 45.45678)
+
+select  count(distinct State) from Location 
+
+select * from dbo.Location
+
+select  count(distinct State) from Location 
+
+select * from location order by State;
+
+select count(distinct product) as producttypecount from Product where Type='Regular';
+
+select * from fact where Total_Expenses > 40;
+
+select sum(Marketing) from fact where ProductId=1;
+
+select min(sales) from fact;
+select max(sales) from fact;
+
+select avg(sales) from fact where Area_code=719;
+select * from location 
+go
+select * from fact
+go
+select * from product
+
+select sum(fact.sales) from fact join location on 
+fact.Area_Code=Location.Area_Code
+where state='colarado'
+
+select productid, avg(inventory) as avcinv from fact group by ProductId
+
+select productId, avg(budget_margin) as avgbudget from fact where budget_margin > 100 group by productId
+
+select max(budget_cogs) from fact group by productId order by max(budget_cogs) desc
+
+select max(budget_cogs) from fact
+
+select * from product where product_type='coffee'
+
+select sum(sales) from fact where date='2010-01-01'
+
+select productId, Date ,avg(Total_Expenses) as toatalexp from fact group by productId, date order by productid
+
+select fact.date,fact.productId, product.product_type, product.product,fact.sales,fact.profit,Location.state,fact.area_code from fact 
+join location on 
+fact.Area_Code=Location.Area_Code
+join product on 
+fact.productId=product.productId
+
+select * , DENSE_RANK() OVER(ORDER BY sales DESC) Rank from fact;
+
+-- group by applicable only on aggragate function 
+select sum(fact.sales),sum(fact.profit),Location.state from fact 
+join location on 
+fact.Area_Code=Location.Area_Code group by State
+
+
+Select SALARY from employee where JOB_ID = (select Job_ID from JOB where Designation='CLERK');
+GO
+update employee
+set SALARY  = (Select (SALARY+SALARY*0.01) from employee where JOB_ID = (select Job_ID from JOB where Designation='CLERK'))
+where JOB_ID = (select Job_ID from JOB where Designation='CLERK');
+GO
+ Select SALARY from employee where JOB_ID = (select Job_ID from JOB where Designation='CLERK');
+ 
+ select DEPARTMENT_ID from DEPARTMENT
+EXCEPT
+select DEPARTMENT_ID from EMPLOYEE
+
+
+
+
